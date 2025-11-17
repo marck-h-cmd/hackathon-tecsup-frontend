@@ -22,7 +22,7 @@ export default function TabLayout() {
         name="courses"
         options={{
           title: 'Courses',
-          tabBarIcon: ({ color }) => <AntDesign size={28} name="book" color={color} />,
+          tabBarIcon: ({ color }) => <AntDesign size={24} name="book" color={color} />,
         }}
       />
       
@@ -30,21 +30,21 @@ export default function TabLayout() {
         name="tutor-sessions"
         options={{
           title: 'Tutor AI',
-          tabBarIcon: ({ color }) => <FontAwesome5 size={28} name="chalkboard-teacher" color={color} />,
+          tabBarIcon: ({ color }) => <FontAwesome5 size={24} name="chalkboard-teacher" color={color} />,
         }}
       />
       <Tabs.Screen
         name="profile"
         options={{
           title: 'Profile',
-          tabBarIcon: ({ color }) => <MaterialIcons size={28} name="person" color={color} />,
+          tabBarIcon: ({ color }) => <MaterialIcons size={24} name="person" color={color} />,
         }}
       />
       <Tabs.Screen
         name="home"
         options={{
           title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          tabBarIcon: ({ color }) => <IconSymbol size={24} name="house.fill" color={color} />,
           href: null,
         }}
       />
@@ -52,7 +52,7 @@ export default function TabLayout() {
         name="users"
         options={{
           title: 'Users',
-          tabBarIcon: ({ color }) => <Feather name='users' size={28} color={color}/>,
+          tabBarIcon: ({ color }) => <Feather name='users' size={24} color={color}/>,
           href: null,
         }}
       />
