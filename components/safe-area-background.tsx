@@ -1,18 +1,19 @@
-import { useColorScheme } from '@/hooks/use-color-scheme.web';
+import { useThemeColor } from '@/hooks/use-theme-color';
 import React, { ReactNode } from 'react';
 import { ViewProps } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-interface SafeAreaBackgroundProps extends ViewProps {
+export type SafeAreaBackgroundProps = ViewProps & {
+  lightColor?: string;
+  darkColor?: string;
   children: ReactNode;
-}
+};
 
-const SafeAreaBackground = ({ children, ...props }: SafeAreaBackgroundProps) => {
-
-    const colorScheme = useColorScheme();
+const SafeAreaBackground = ({ children, style, lightColor, darkColor, ...props }: SafeAreaBackgroundProps) => {
+    const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, 'background');
 
     return (
-        <SafeAreaView {...props} style={{backgroundColor: colorScheme === 'dark' ? '#000' : '#fff', flex: 1}}>
+        <SafeAreaView {...props} style={[{ backgroundColor, flex: 1 }, style]}>
             {children}
         </SafeAreaView>
     )
