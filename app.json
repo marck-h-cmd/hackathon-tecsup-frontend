@@ -24,7 +24,7 @@
     "web": {
       "output": "static",
       "favicon": "./assets/images/favicon.png",
-      "port":3000
+      "port": 3000
     },
     "plugins": [
       "expo-router",
@@ -38,6 +38,12 @@
           "dark": {
             "backgroundColor": "#000000"
           }
+        }
+      ],
+      [
+        "expo-audio",
+        {
+          "microphonePermission": "Permitir a $(PRODUCT_NAME) acceder a tu micrófono //."
         }
       ]
     ],

@@ -1,12 +1,13 @@
-import { View, Text } from 'react-native'
+import SafeAreaBackground from '@/components/safe-area-background'
+import { ThemedView } from '@/components/themed-view'
 import React from 'react'
 
-const voice = () => {
+const VoiceScreen = () => {
   return (
-    <View>
-      <Text>voice</Text>
-    </View>
+    <SafeAreaBackground>
+      <ThemedView></ThemedView>
+    </SafeAreaBackground>
   )
 }
 
-export default voice
+export default VoiceScreen
