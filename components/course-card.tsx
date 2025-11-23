@@ -6,9 +6,9 @@ import { ThemedView } from './themed-view';
 export function CourseCard({ curso }: { curso: Curso }) {
   return (
     <ThemedView style={styles.container}>
-      <ThemedText type="subtitle">{curso.titulo}</ThemedText>
+      <ThemedText type="subtitle">{curso.nombre}</ThemedText>
       {curso.descripcion ? <ThemedText>{curso.descripcion}</ThemedText> : null}
-      <ThemedText>{curso.publicado ? 'Publicado' : 'Borrador'}</ThemedText>
+      <ThemedText>{curso.es_publico ? 'es_publico' : 'Borrador'}</ThemedText>
     </ThemedView>
   );
 }

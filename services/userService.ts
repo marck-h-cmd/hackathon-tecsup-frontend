@@ -1,4 +1,4 @@
-import { User } from '@/types/api';
+import { User , PerfilEstudiante} from '@/types/api';
 import { api } from './api';
 
 export async function fetchUsers(): Promise<User[]> {
@@ -12,3 +12,82 @@ export async function fetchUserById(id: string | number): Promise<User> {
 export async function createUser(payload: Partial<User>): Promise<User> {
   return api.post<User>('/users', payload);
 }
+
+// --- Nuevas funciones para mapear todas las rutas del backend ---
+
+// Tipos locales mínimos (reemplazar/importar reales si existen en '@/types/api')
+
+type EstadisticasUsuarios = any;
+type TopEstudiante = any;
+type AdminVerifyPayload = { email: string; password: string };
+type Filters = Record<string, string | number | boolean>;
+
+// Verifica usuario (ruta: GET /verifyUser/:userId)
+export async function verifyUser(userId: string | number): Promise<any> {
+  return api.get(`/verifyUser/${userId}`);
+}
+
+// Buscar usuario por email (ruta: GET /users/email/:email)
+export async function fetchUserByEmail(email: string): Promise<User> {
+  return api.get<User>(`/users/email/${encodeURIComponent(email)}`);
+}
+
+// Obtener usuarios con filtros (ruta: GET /users?...)
+export async function fetchUsersWithFilters(filters?: Filters): Promise<User[]> {
+  return api.get<User[]>('/users', { params: filters ?? ({} as Filters) });
+}
+
+// Actualizar usuario (ruta: PUT /users/:id)
+export async function updateUser(id: string | number, payload: Partial<User>): Promise<User> {
+  return api.put<User>(`/users/${id}`, payload);
+}
+
+// Desactivar / eliminar usuario (ruta: DELETE /users/:id)
+export async function deactivateUser(id: string | number): Promise<void> {
+  return api.delete(`/users/${id}`);
+}
+
+// Obtener usuario con su perfil (ruta: GET /users/:userId/profile)
+export async function getUserWithProfile(userId: string | number): Promise<any> {
+  return api.get(`/users/${userId}/profile`);
+}
+
+// --- Rutas de perfil-estudiante ---
+
+export async function createPerfilEstudiante(payload: Partial<PerfilEstudiante>): Promise<PerfilEstudiante> {
+  return api.post<PerfilEstudiante>('/perfil-estudiante', payload);
+}
+
+export async function getPerfilEstudianteByUserId(usuarioId: string | number): Promise<PerfilEstudiante> {
+  return api.get<PerfilEstudiante>(`/perfil-estudiante/${usuarioId}`);
+}
+
+export async function updatePerfilEstudiante(usuarioId: string | number, payload: Partial<PerfilEstudiante>): Promise<PerfilEstudiante> {
+  return api.put<PerfilEstudiante>(`/perfil-estudiante/${usuarioId}`, payload);
+}
+
+export async function updateStreakEstudiante(usuarioId: string | number, payload: { streak?: number }): Promise<any> {
+  return api.patch(`/perfil-estudiante/${usuarioId}/streak`, payload);
+}
+
+export async function addExperienciaEstudiante(usuarioId: string | number, payload: { experiencia: number }): Promise<any> {
+  return api.patch(`/perfil-estudiante/${usuarioId}/experiencia`, payload);
+}
+
+// --- Admin ---
+
+export async function verifyAdminCredentials(credentials: AdminVerifyPayload): Promise<any> {
+  return api.post('/admin/verify', credentials);
+}
+
+// --- Estadísticas ---
+
+export async function getEstadisticasUsuarios(): Promise<EstadisticasUsuarios> {
+  return api.get<EstadisticasUsuarios>('/estadisticas/usuarios');
+}
+
+export async function getTopEstudiantesPorExperiencia(params?: Filters): Promise<TopEstudiante[]> {
+  return api.get<TopEstudiante[]>('/estadisticas/top-estudiantes', { params });
+}
+
+
