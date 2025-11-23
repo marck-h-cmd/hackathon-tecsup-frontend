@@ -1,4 +1,4 @@
-export const BACKEND_URL = process.env.BACKEND_URL ?? 'http://localhost:3000';
+export const BACKEND_URL = process.env.EXPO_PUBLIC_API_URL ?? 'http://localhost:4000';
 
 type RequestOptions = RequestInit & {
   query?: Record<string, string | number | boolean>;

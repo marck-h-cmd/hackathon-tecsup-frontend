@@ -17,7 +17,7 @@ export type CardProps = ViewProps & {
 
 const CardComponent = ({title, style, lightColor, darkColor, destiny, icon, ...props}: CardProps) => {
     const getColor = useHookColor(lightColor, darkColor);
-    const backgroundColor = getColor('card');
+    const cardColor = getColor('card');
     const textColor = getColor('text');
 
     const router = useRouter();
@@ -28,7 +28,7 @@ const CardComponent = ({title, style, lightColor, darkColor, destiny, icon, ...p
 
     return (
         <TouchableOpacity onPress={onPress}>
-            <Card {...props} style={[{ backgroundColor, padding: 12, borderRadius: 8}, style]}>
+            <Card {...props} style={[{ backgroundColor: cardColor, padding: 12, borderRadius: 8}, style]}>
                 <View className='flex-row items-center gap-2'>
                     <View>
                         <MaterialCommunityIcons name={icon} size={24} color={textColor} />

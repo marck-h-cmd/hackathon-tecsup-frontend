@@ -1,6 +1,7 @@
-import { User , PerfilEstudiante} from '@/types/api';
+import { PerfilEstudiante, User } from '@/types/api';
+import axios from 'axios';
 import { api } from './api';
-
+const BACKEND_URL = process.env.EXPO_PUBLIC_API_URL ?? 'http://localhost:4000';
 export async function fetchUsers(): Promise<User[]> {
   return api.get<User[]>('/users');
 }
@@ -83,7 +84,16 @@ export async function verifyAdminCredentials(credentials: AdminVerifyPayload): P
 // --- Estadísticas ---
 
 export async function getEstadisticasUsuarios(): Promise<EstadisticasUsuarios> {
-  return api.get<EstadisticasUsuarios>('/estadisticas/usuarios');
+  try {
+    const response = await axios.get(`${BACKEND_URL}/user/estadisticas/usuarios`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
 }
 
 export async function getTopEstudiantesPorExperiencia(params?: Filters): Promise<TopEstudiante[]> {
