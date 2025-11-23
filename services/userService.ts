@@ -35,7 +35,16 @@ export async function fetchUserByEmail(email: string): Promise<User> {
 
 // Obtener usuarios con filtros (ruta: GET /users?...)
 export async function fetchUsersWithFilters(filters?: Filters): Promise<User[]> {
-  return api.get<User[]>('/users', { params: filters ?? ({} as Filters) });
+  try {
+    const response = await axios.get(`${BACKEND_URL}/users`, {
+      headers: {
+        'Content-Type': 'application/json',
+      }, 
+      params: filters });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
 }
 
 // Actualizar usuario (ruta: PUT /users/:id)
@@ -97,7 +106,17 @@ export async function getEstadisticasUsuarios(): Promise<EstadisticasUsuarios> {
 }
 
 export async function getTopEstudiantesPorExperiencia(params?: Filters): Promise<TopEstudiante[]> {
-  return api.get<TopEstudiante[]>('/estadisticas/top-estudiantes', { params });
+  try {
+    const response = await axios.get(`${BACKEND_URL}/user/estadisticas/top-estudiantes`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      params,
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
 }
 
 

@@ -1,19 +1,49 @@
-import { api } from './api';
+import axios from 'axios';
 import { Curso, ApiResponse, PaginatedResponse } from '@/types/api';
+
+const BACKEND_URL = process.env.EXPO_PUBLIC_API_URL ?? 'http://localhost:4000';
 
 export async function fetchCursos(params?: {
   page?: number;
   limit?: number;
 }): Promise<ApiResponse<PaginatedResponse<Curso>>> {
-  return api.get<ApiResponse<PaginatedResponse<Curso>>>('/api/cursos', params);
+  try {
+    const response = await axios.get(`${BACKEND_URL}/api/cursos`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      params,
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
 }
 
 export async function fetchCursoById(id: string | number): Promise<ApiResponse<Curso>> {
-  return api.get<ApiResponse<Curso>>(`/api/cursos/${id}`);
+  try {
+    const response = await axios.get(`${BACKEND_URL}/api/cursos/${id}`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
 }
 
 export async function fetchCursoByCodigo(codigo: string): Promise<ApiResponse<Curso>> {
-  return api.get<ApiResponse<Curso>>(`/api/cursos/codigo/${codigo}`);
+  try {
+    const response = await axios.get(`${BACKEND_URL}/api/cursos/codigo/${codigo}`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
 }
 
 export async function fetchCursosWithFilters(params: {
@@ -24,44 +54,136 @@ export async function fetchCursosWithFilters(params: {
   page?: number;
   limit?: number;
 }): Promise<ApiResponse<PaginatedResponse<Curso>>> {
-  return api.get<ApiResponse<PaginatedResponse<Curso>>>('/api/cursos/filtros', params);
+  try {
+    const response = await axios.get(`${BACKEND_URL}/api/cursos/filtros`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      params,
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
 }
 
 export async function fetchCursosPublicos(params?: {
   page?: number;
   limit?: number;
 }): Promise<ApiResponse<PaginatedResponse<Curso>>> {
-  return api.get<ApiResponse<PaginatedResponse<Curso>>>('/api/cursos/publicos', params);
+  try {
+    const response = await axios.get(`${BACKEND_URL}/api/cursos/publicos`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      params,
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
 }
 
 export async function fetchCursoWithSecciones(id: string | number): Promise<ApiResponse<Curso>> {
-  return api.get<ApiResponse<Curso>>(`/api/cursos/${id}/secciones`);
+  try {
+    const response = await axios.get(`${BACKEND_URL}/api/cursos/${id}/secciones`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
 }
 
 export async function fetchCursoCompleto(id: string | number): Promise<ApiResponse<Curso>> {
-  return api.get<ApiResponse<Curso>>(`/api/cursos/${id}/completo`);
+  try {
+    const response = await axios.get(`${BACKEND_URL}/api/cursos/${id}/completo`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
 }
 
 export async function fetchEstadisticasCurso(id: string | number): Promise<ApiResponse<any>> {
-  return api.get<ApiResponse<any>>(`/api/cursos/${id}/estadisticas`);
+  try {
+    const response = await axios.get(`${BACKEND_URL}/api/cursos/${id}/estadisticas`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
 }
 
 export async function fetchEstadisticasGeneralesCursos(): Promise<ApiResponse<any>> {
-  return api.get<ApiResponse<any>>('/api/cursos/estadisticas');
+  try {
+    const response = await axios.get(`${BACKEND_URL}/api/cursos/estadisticas`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
 }
 
 export async function createCurso(payload: Partial<Curso>): Promise<ApiResponse<Curso>> {
-  return api.post<ApiResponse<Curso>>('/api/cursos', payload);
+  try {
+    const response = await axios.post(`${BACKEND_URL}/api/cursos`, payload, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
 }
 
 export async function updateCurso(id: string | number, payload: Partial<Curso>): Promise<ApiResponse<Curso>> {
-  return api.put<ApiResponse<Curso>>(`/api/cursos/${id}`, payload);
+  try {
+    const response = await axios.put(`${BACKEND_URL}/api/cursos/${id}`, payload, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
 }
 
 export async function deleteCurso(id: string | number): Promise<ApiResponse<boolean>> {
-  return api.del<ApiResponse<boolean>>(`/api/cursos/${id}`);
+  try {
+    const response = await axios.delete(`${BACKEND_URL}/api/cursos/${id}`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
 }
 
 export async function deactivateCurso(id: string | number): Promise<ApiResponse<Curso>> {
-  return api.put<ApiResponse<Curso>>(`/api/cursos/${id}/desactivar`, {});
+  try {
+    const response = await axios.put(`${BACKEND_URL}/api/cursos/${id}/desactivar`, {}, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
 }
