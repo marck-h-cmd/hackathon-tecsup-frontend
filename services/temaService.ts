@@ -1,5 +1,5 @@
+import { ApiResponse, PaginatedResponse, Tema } from '@/types/api';
 import axios from 'axios';
-import { Tema, ApiResponse,PaginatedResponse } from '@/types/api';
 
 const BACKEND_URL = process.env.EXPO_PUBLIC_API_URL ?? 'http://localhost:4000';
 
